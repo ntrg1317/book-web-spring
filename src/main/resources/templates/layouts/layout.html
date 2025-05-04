@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout: Main</title>
+    <th:block th:insert="~{/elements/head :: head}"></th:block>
+</head>
+<body>
+<div>
+    <th:block layout:fragment="content"></th:block>
+</div>
+<th:block th:insert="~{/elements/script :: script}"></th:block>
+</body>
+</html>

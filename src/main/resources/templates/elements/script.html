@@ -1,0 +1,19 @@
+<!--    jQuery-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!-- plugins:js -->
+<div th:fragment="script">
+    <script th:src="@{/vendors/js/vendor_bundle_base.js}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script th:src="@{/vendors/typeahead.js/typeahead.bundle.min.js}"></script>
+    <script th:src="@{/vendors/select2/select2.min.js}"></script>
+    <script th:src="@{/vendors/moment/moment.min.js}"></script>
+    <script th:src="@{/vendors/daterangepicker/daterangepicker.js}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/misc.js}"></script>
+    <script th:src="@{/js/dropdown.js}"></script>
+    <script th:src="@{/js/select2.js}"></script>
+</div>
