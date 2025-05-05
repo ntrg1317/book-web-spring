@@ -43,7 +43,7 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "models_has_roles",
+            name = "model_has_roles",
             joinColumns = {
                     @JoinColumn(name = "model_id", referencedColumnName = "id")
             },
