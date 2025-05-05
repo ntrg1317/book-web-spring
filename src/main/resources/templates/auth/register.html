@@ -20,9 +20,7 @@
                             <form class="pt-3" role="form" method="post" th:action="@{/register/save}" th:object="${user}">
                                 <div class="form-group">
                                     <input type="text"
-                                           name="name"
                                            class="form-control form-control-lg"
-                                           id="name"
                                            placeholder="Full Name"
                                            th:field="*{name}"
                                     >
@@ -53,6 +51,7 @@
                                            th:field="*{confirmPassword}"
                                     >
                                     <span th:errors="*{confirmPassword}" class="text-danger" th:if="${#fields.hasErrors('confirmPassword')}"></span>
+                                    <span th:each="err : ${#fields.globalErrors()}" class="text-danger" th:text="${err}"></span>
                                 </div>
                                 <div class="mb-4">
                                     <div class="form-check">
@@ -69,7 +68,7 @@
                                     </button>
                                 </div>
                                 <div class="text-center mt-4 font-weight-light"> Already have an account? <a
-                                        href="{{ route('login') }}" class="text-primary">Login</a>
+                                        th:href="@{/login}" class="text-primary">Login</a>
                                 </div>
                             </form>
                         </div>

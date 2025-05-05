@@ -4,6 +4,7 @@ import com.trang.book.dto.UserDto;
 import com.trang.book.entity.User;
 import com.trang.book.security.RedirectUtil;
 import com.trang.book.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,7 @@ public class AuthController {
     }
 
     @PostMapping("/register/save")
-    public String register(@ModelAttribute("user") UserDto userDto,
+    public String register(@ModelAttribute("user") @Valid UserDto userDto,
                            BindingResult result,
                            Model model) {
         User existUser = userService.findByEmail(userDto.getEmail());
@@ -49,6 +50,7 @@ public class AuthController {
         }
 
         if (result.hasErrors()) {
+            result.getAllErrors().forEach(System.out::println);
             model.addAttribute("user", userDto);
             return "auth/register";
         }
