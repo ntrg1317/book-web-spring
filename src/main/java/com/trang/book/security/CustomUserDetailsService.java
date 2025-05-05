@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                     user.getPassword(),
                     Collections.emptyList()
                     );
-        } else{
+        } else {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
     }

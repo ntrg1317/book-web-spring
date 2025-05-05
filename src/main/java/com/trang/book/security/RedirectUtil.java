@@ -9,7 +9,7 @@ public class RedirectUtil {
     public static String getRedirectUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+            if (grantedAuthority.getAuthority().equals("ADMIN")) {
                 return "/admin/dashboard";
             } else if (grantedAuthority.getAuthority().equals("ROLE_CUSTOMER")) {
                 return "/search";
