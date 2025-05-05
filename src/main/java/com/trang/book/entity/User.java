@@ -1,4 +1,4 @@
-package com.trang.book.model;
+package com.trang.book.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
