@@ -2,7 +2,6 @@ package com.trang.book.controller;
 
 import com.trang.book.dto.UserDto;
 import com.trang.book.entity.User;
-import com.trang.book.repository.UserRepository;
 import com.trang.book.security.RedirectUtil;
 import com.trang.book.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -29,7 +28,7 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String showLoginForm() {
         return "auth/login";
     }
 
@@ -50,6 +49,7 @@ public class AuthController {
         }
 
         if (result.hasErrors()) {
+            model.addAttribute("user", userDto);
             return "auth/register";
         }
 
