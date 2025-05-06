@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AuthController {
@@ -23,18 +22,23 @@ public class AuthController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("message", "Hello!");
+    public String index(Authentication authentication) {
+        String redirect = getAuthenticatedUserRedirectUrl(authentication);
+        if (redirect != null) return redirect;
         return "index";
     }
 
     @GetMapping("/login")
-    public String showLoginForm() {
+    public String showLoginForm(Authentication authentication) {
+        String redirect = getAuthenticatedUserRedirectUrl(authentication);
+        if (redirect != null) return redirect;
         return "auth/login";
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
+    public String showRegistrationForm(Authentication authentication, Model model) {
+        String redirect = getAuthenticatedUserRedirectUrl(authentication);
+        if (redirect != null) return redirect;
         UserDto user = new UserDto();
         model.addAttribute("user", user);
         return "auth/register";
@@ -50,12 +54,21 @@ public class AuthController {
         }
 
         if (result.hasErrors()) {
-            result.getAllErrors().forEach(System.out::println);
             model.addAttribute("user", userDto);
             return "auth/register";
         }
 
         userService.saveUser(userDto);
-        return "redirect:/register?success";
+        return "redirect:/login";
+    }
+
+    private String getAuthenticatedUserRedirectUrl(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            String redirectUrl = RedirectUtil.getRedirectUrl(authentication);
+            if (redirectUrl != null) {
+                return "redirect:" + redirectUrl;
+            }
+        }
+        return null;
     }
 }

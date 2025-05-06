@@ -9,12 +9,10 @@ public class RedirectUtil {
     public static String getRedirectUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ADMIN")) {
-                return "/admin/dashboard";
-            } else if (grantedAuthority.getAuthority().equals("ROLE_CUSTOMER")) {
-                return "/search";
-            } else if (grantedAuthority.getAuthority().equals("ROLE_HOTEL_MANAGER")) {
-                return "/manager/dashboard";
+            if (grantedAuthority.getAuthority().equals("ROLE_admin")) {
+                return "/admin/book";
+            } else if (grantedAuthority.getAuthority().equals("ROLE_user")) {
+                return "/book";
             }
         }
         return null;

@@ -4,11 +4,35 @@
     <meta charset="UTF-8">
     <title>Layout: Main</title>
     <th:block th:insert="~{/elements/head :: head}"></th:block>
+    <th:block layout:fragment="additional-styles"></th:block>
 </head>
 <body>
-<div>
-    <th:block layout:fragment="content"></th:block>
+<div th:if="${#authorization.expression('hasRole(''ROLE_user'')')}">
+    <div class="container-scroller">
+        <div th:replace="~{/elements/navbar_user :: navbar}"></div>
+        <div class="container-fluid page-body-wrapper">
+            <div class="content-wrapper">
+                <div layout:fragment="content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nếu user có role "admin" -->
+<div th:if="${#authorization.expression('hasRole(''ROLE_admin'')')}">
+    <div class="container-scroller">
+        <th:block th:insert="~{/elements/navbar :: navbar}"></th:block>
+        <div class="container-fluid page-body-wrapper">
+            <th:block th:replace="~{/elements/sidebar :: sidebar}"></th:block>
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div layout:fragment="content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <th:block th:insert="~{/elements/script :: script}"></th:block>
+<th:block layout:fragment="additional-scipts"></th:block>
 </body>
 </html>

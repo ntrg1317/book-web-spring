@@ -7,10 +7,11 @@ import com.trang.book.validation.annotation.ValidEmail;
 import jakarta.validation.constraints.*;
 
 import lombok.*;
-import org.aspectj.bridge.IMessage;
 
 @Getter
 @Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @PasswordMatches

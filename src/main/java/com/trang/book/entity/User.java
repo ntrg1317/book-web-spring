@@ -52,9 +52,4 @@ public class User {
             }
     )
     private List<Role> roles = new ArrayList<>();
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, createdAt);
-    }
 }
