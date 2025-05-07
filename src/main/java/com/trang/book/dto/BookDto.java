@@ -13,6 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookDto {
+    private Long id;
+
     @NotNull(message = "ISDB code should not be empty")
     private String isbn;
 
@@ -41,5 +43,5 @@ public class BookDto {
 
     private String image;
 
-    private String status;
+    private Integer status;
 }

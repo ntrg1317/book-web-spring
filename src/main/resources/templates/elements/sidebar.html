@@ -29,25 +29,23 @@
         </li>
         <li class="nav-item nav-category"><span class="nav-link">Management</span></li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#book" role="button" aria-expanded="false"
+            <a class="nav-link" role="button" aria-expanded="false"
                aria-controls="book">
                 <span class="menu-title">Book</span>
                 <i class="icon-book-open menu-icon"></i>
             </a>
-            <div class="collapse" id="book">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin/book}">
-                            <span class="menu-title">Book List</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin/book/create}">
-                            <span class="menu-title">Add Book</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/book}">
+                        <span class="menu-title">Book List</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/book/create}">
+                        <span class="menu-title">Add Book</span>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="nav-item">
             <a class="nav-link" th:href="@{/admin/book}">
@@ -82,8 +80,7 @@
             <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" th:href="@{/login}"> Login </a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/logout}"> Register </a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/logout}"> Register </a></li>
 <!--                    <li class="nav-item"><a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>-->
 <!--                    <li class="nav-item"><a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>-->
 <!--                    <li class="nav-item"><a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>-->

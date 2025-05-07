@@ -59,7 +59,7 @@ public class Book {
 
     private String image;
 
-    private String status;
+    private Integer status;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

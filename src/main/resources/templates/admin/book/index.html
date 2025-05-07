@@ -28,10 +28,8 @@
                         <div class="col-md-4 book-status">
                             <select id="bookStatus" class="form-control text-capitalize">
                                 <option value="">Status</option>
-<!--                                <option value="1" {{ request()->get('is_active') == 1 ? "selected" : "" }}>Active-->
-                                </option>
-<!--                                <option value="2" {{ request()->get('is_active') == 2 ? "selected" : "" }}>Inactive-->
-                                </option>
+                                <option value="1" th:selected="${param.is_active == 1}">Active</option>
+                                <option value="2" th:selected="${param.is_active == 2}">Inactive</option>
                             </select>
                         </div>
                     </div>
@@ -46,19 +44,19 @@
                         <form action="" class="search-form w-50">
                             <input id="search-book" type="text" name="key" class="form-control search-book"
                                    placeholder="Search Title" title="search" autocomplete="off"
-                                   value="{{ request()->get('key') }}">
+                                   value="">
                             <span id="bookList"></span>
                         </form>
                         <div class="book-filter">
                             <select name="limit" id="limit" class="form-control">
-                                <option class="limit_5" value="5" {{ request()->get('limit') == 5 ? "selected" : "" }}>
+                                <option class="limit_5" value="5">
                                     5
                                 </option>
                                 <option class="limit_10"
-                                        value="10" {{ request()->get('limit') == 10 ? "selected" : "" }}>10
+                                        value="10">10
                                 </option>
                                 <option class="limit_20"
-                                        value="20" {{ request()->get('limit') == 20 ? "selected" : "" }}>20
+                                        value="20">20
                                 </option>
                             </select>
                         </div>
@@ -79,14 +77,14 @@
                         </thead>
                         <tbody>
                             <tr th:each="book : ${books}">
-                                <td>{{ ++$key }}</td>
+                                <td th:text="${book.id}"></td>
                                 <td>
-                                    <div class="book-title cursor-pointer"
+                                    <a class="book-title cursor-pointer btn p-0 text-left"
                                          style="white-space: break-spaces !important; min-width: 160px;"
-                                         onclick="window.location.href = ''"
+                                         th:href="@{/admin/book/{id}(id=${book.id})}"
                                          th:text="${book.title}"
                                     >
-                                    </div>
+                                    </a>
                                     <div class="book-author text-gray" th:text="${book.authors}"></div>
                                 </td>
                                 <td th:text="${book.isbn}"></td>
@@ -97,99 +95,21 @@
                                     <label th:if="${book.status == 1}" class="badge badge-success">Active</label>
                                     <label th:if="${book.status != 1}" class="badge badge-danger">Inactive</label>
                                 </td>
-                                <td class="text-center"><i class="icon-action icon-options-vertical"></i></td>
+                                <td class="text-center">
+                                    <div>
+                                        <a class="btn btn-icon" th:href="@{admin/book/edit}"><i class="icon-pencil"></i></a>
+                                        <a class="btn btn-icon" th:href="@{admin/book/del}"><i class="icon-trash"></i></a>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-<!--                    {{ $allBooks->withQueryString()->links('user.custom-pagination') }}-->
                 </div>
             </div>
         </div>
     </div>
 </th:block>
 <th:block layout:fragment="additional-scripts">
-<!--    <script>-->
-<!--        $(document).ready(function () {-->
-
-<!--            $('#limit').on('change', function () {-->
-<!--                let params = getParams();-->
-<!--                filterTable(params);-->
-<!--            });-->
-
-<!--            $('#bookStatus').on('change', function () {-->
-<!--                let params = getParams();-->
-<!--                filterTable(params);-->
-<!--            });-->
-
-<!--            $('#search-book').on('keypress', function (e) {-->
-<!--                if (e.which === 13) {-->
-<!--                    let params = getParams();-->
-<!--                    params['key'] = $(this).val();-->
-<!--                    filterTable(params);-->
-<!--                }-->
-<!--            });-->
-
-<!--            function getParams() {-->
-<!--                let limit = $('#limit').find(":selected").val();-->
-<!--                let key = '{{ request()->get('key') ?? '' }}';-->
-<!--                let status = $('#bookStatus').find(":selected").val();-->
-<!--                return {-->
-<!--                    'key': key,-->
-<!--                    'limit': limit,-->
-<!--                    'is_active': status-->
-<!--                }-->
-<!--            }-->
-
-<!--            function filterTable(params) {-->
-<!--                let url = '/admin/book/index';-->
-<!--                let paramsUrl = [];-->
-
-<!--                $.each(params, function (key, value) {-->
-<!--                    console.log(key)-->
-<!--                    if (value !== '') {-->
-<!--                        paramsUrl.push(key + '=' + value)-->
-<!--                    }-->
-<!--                })-->
-
-<!--                if (paramsUrl.length > 0) {-->
-<!--                    url += '?' + paramsUrl.join('&');-->
-<!--                }-->
-
-<!--                window.location.href = url;-->
-<!--            }-->
-
-<!--            $('.search-book').on("keyup", function () {-->
-<!--                let key = $(this).val();-->
-
-<!--                if (key === '') {-->
-<!--                    $('#bookList').html('');-->
-<!--                } else {-->
-<!--                    $.ajax({-->
-<!--                        type: 'get',-->
-<!--                        url: '{{ route('admin.book.index') }}',-->
-<!--                        data: {-->
-<!--                            'key': key-->
-<!--                        },-->
-<!--                        success: function (data) {-->
-<!--                            $('#bookList').html(data);-->
-<!--                        }-->
-<!--                    });-->
-<!--                }-->
-
-<!--                $('body').on('click', function (event) {-->
-<!--                    $('#bookList').html('');-->
-<!--                });-->
-
-<!--                $('#bookList').on('click', 'li', function () {-->
-<!--                    let id = $(this).data('book-id');-->
-<!--                    window.location.href = `/admin/book/detail/${id}`;-->
-<!--                });-->
-<!--            });-->
-<!--            $.ajaxSetup({headers: {'csrftoken': '{{ csrf_token() }}'}});-->
-
-<!--            $()-->
-<!--        })-->
-<!--    </script>-->
 </th:block>
 </body>
 </html>

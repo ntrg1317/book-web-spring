@@ -18,8 +18,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book findBookById(Long id) {
-        return bookRepository.findBookById(id);
+    public BookDto findBookById(Long id) {
+        Book book = bookRepository.findBookById(id);
+        return mapBookToBookDto(book);
     }
 
     @Override
@@ -34,8 +35,18 @@ public class BookServiceImpl implements BookService {
         return bookDtoList;
     }
 
+    @Override
+    public void updateBookStatus(Long id, Integer status) {
+        Book book = bookRepository.findBookById(id);
+
+        book.setStatus(status);
+        bookRepository.save(book);
+    }
+
+
     private BookDto mapBookToBookDto(Book book) {
         return BookDto.builder()
+                .id(book.getId())
                 .isbn(book.getIsbn())
                 .title(book.getTitle())
                 .authors(book.getAuthors())

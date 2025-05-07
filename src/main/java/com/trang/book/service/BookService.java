@@ -6,7 +6,9 @@ import com.trang.book.entity.Book;
 import java.util.List;
 
 public interface BookService {
-    Book findBookById(Long id);
+    BookDto findBookById(Long id);
 
     List<BookDto> findAllBooks();
+
+    void updateBookStatus(Long id, Integer status);
 }
