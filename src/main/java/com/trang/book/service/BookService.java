@@ -11,4 +11,6 @@ public interface BookService {
     List<BookDto> findAllBooks();
 
     void updateBookStatus(Long id, Integer status);
+
+    Book saveBook(BookDto bookDto);
 }
